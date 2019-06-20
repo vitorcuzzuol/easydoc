@@ -1,21 +1,22 @@
 package Models;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "comentario", schema = "easydoc", catalog = "")
-public class ComentarioEntity {
+public class Comentario {
     private int idcomentario;
     private int idtarefa;
     private int idusuario;
     private String comentario;
-    private Timestamp dataDeInicio;
-    private Timestamp ultimaModificacao;
+    private Date dataDeInicio;
+    private Date ultimaModificacao;
+    private Tarefa tarefaByIdtarefa;
+    private Usuario usuarioByIdusuario;
 
     @Id
-    @Column(name = "IDCOMENTARIO")
+    @Column(name = "idcomentario")
     public int getIdcomentario() {
         return idcomentario;
     }
@@ -25,7 +26,7 @@ public class ComentarioEntity {
     }
 
     @Basic
-    @Column(name = "IDTAREFA")
+    @Column(name = "idtarefa")
     public int getIdtarefa() {
         return idtarefa;
     }
@@ -35,7 +36,7 @@ public class ComentarioEntity {
     }
 
     @Basic
-    @Column(name = "IDUSUARIO")
+    @Column(name = "idusuario")
     public int getIdusuario() {
         return idusuario;
     }
@@ -45,7 +46,7 @@ public class ComentarioEntity {
     }
 
     @Basic
-    @Column(name = "COMENTARIO")
+    @Column(name = "comentario")
     public String getComentario() {
         return comentario;
     }
@@ -55,22 +56,22 @@ public class ComentarioEntity {
     }
 
     @Basic
-    @Column(name = "DATA_DE_INICIO")
-    public Timestamp getDataDeInicio() {
+    @Column(name = "data_de_inicio")
+    public Date getDataDeInicio() {
         return dataDeInicio;
     }
 
-    public void setDataDeInicio(Timestamp dataDeInicio) {
+    public void setDataDeInicio(Date dataDeInicio) {
         this.dataDeInicio = dataDeInicio;
     }
 
     @Basic
-    @Column(name = "ULTIMA_MODIFICACAO")
-    public Timestamp getUltimaModificacao() {
+    @Column(name = "ultima_modificacao")
+    public Date getUltimaModificacao() {
         return ultimaModificacao;
     }
 
-    public void setUltimaModificacao(Timestamp ultimaModificacao) {
+    public void setUltimaModificacao(Date ultimaModificacao) {
         this.ultimaModificacao = ultimaModificacao;
     }
 
@@ -78,7 +79,7 @@ public class ComentarioEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ComentarioEntity that = (ComentarioEntity) o;
+        Comentario that = (Comentario) o;
         return idcomentario == that.idcomentario &&
                 idtarefa == that.idtarefa &&
                 idusuario == that.idusuario &&
@@ -90,5 +91,27 @@ public class ComentarioEntity {
     @Override
     public int hashCode() {
         return Objects.hash(idcomentario, idtarefa, idusuario, comentario, dataDeInicio, ultimaModificacao);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idtarefa", referencedColumnName = "idtarefa", nullable = false,
+            insertable = false, updatable = false)
+    public Tarefa getTarefaByIdtarefa() {
+        return tarefaByIdtarefa;
+    }
+
+    public void setTarefaByIdtarefa(Tarefa tarefaByIdtarefa) {
+        this.tarefaByIdtarefa = tarefaByIdtarefa;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idusuario", referencedColumnName = "idusuario", nullable = false,
+            insertable = false, updatable = false)
+    public Usuario getUsuarioByIdusuario() {
+        return usuarioByIdusuario;
+    }
+
+    public void setUsuarioByIdusuario(Usuario usuarioByIdusuario) {
+        this.usuarioByIdusuario = usuarioByIdusuario;
     }
 }

@@ -4,17 +4,18 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "anexo", schema = "easydoc", catalog = "")
-public class AnexoEntity {
+public class Anexo {
     private int idanexo;
     private int idtarefa;
     private int idusuario;
     private String nome;
     private String descricao;
     private String tipo;
+    private Tarefa tarefaByIdtarefa;
+    private Usuario usuarioByIdusuario;
 
     @Id
-    @Column(name = "IDANEXO")
+    @Column(name = "idanexo")
     public int getIdanexo() {
         return idanexo;
     }
@@ -24,7 +25,7 @@ public class AnexoEntity {
     }
 
     @Basic
-    @Column(name = "IDTAREFA")
+    @Column(name = "idtarefa")
     public int getIdtarefa() {
         return idtarefa;
     }
@@ -34,7 +35,7 @@ public class AnexoEntity {
     }
 
     @Basic
-    @Column(name = "IDUSUARIO")
+    @Column(name = "idusuario")
     public int getIdusuario() {
         return idusuario;
     }
@@ -44,7 +45,7 @@ public class AnexoEntity {
     }
 
     @Basic
-    @Column(name = "NOME")
+    @Column(name = "nome")
     public String getNome() {
         return nome;
     }
@@ -54,7 +55,7 @@ public class AnexoEntity {
     }
 
     @Basic
-    @Column(name = "DESCRICAO")
+    @Column(name = "descricao")
     public String getDescricao() {
         return descricao;
     }
@@ -64,7 +65,7 @@ public class AnexoEntity {
     }
 
     @Basic
-    @Column(name = "TIPO")
+    @Column(name = "tipo")
     public String getTipo() {
         return tipo;
     }
@@ -77,17 +78,39 @@ public class AnexoEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AnexoEntity that = (AnexoEntity) o;
-        return idanexo == that.idanexo &&
-                idtarefa == that.idtarefa &&
-                idusuario == that.idusuario &&
-                Objects.equals(nome, that.nome) &&
-                Objects.equals(descricao, that.descricao) &&
-                Objects.equals(tipo, that.tipo);
+        Anexo anexo = (Anexo) o;
+        return idanexo == anexo.idanexo &&
+                idtarefa == anexo.idtarefa &&
+                idusuario == anexo.idusuario &&
+                Objects.equals(nome, anexo.nome) &&
+                Objects.equals(descricao, anexo.descricao) &&
+                Objects.equals(tipo, anexo.tipo);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(idanexo, idtarefa, idusuario, nome, descricao, tipo);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idtarefa", referencedColumnName = "idtarefa", nullable = false,
+            insertable = false, updatable = false)
+    public Tarefa getTarefaByIdtarefa() {
+        return tarefaByIdtarefa;
+    }
+
+    public void setTarefaByIdtarefa(Tarefa tarefaByIdtarefa) {
+        this.tarefaByIdtarefa = tarefaByIdtarefa;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idusuario", referencedColumnName = "idusuario", nullable = false,
+            insertable = false, updatable = false)
+    public Usuario getUsuarioByIdusuario() {
+        return usuarioByIdusuario;
+    }
+
+    public void setUsuarioByIdusuario(Usuario usuarioByIdusuario) {
+        this.usuarioByIdusuario = usuarioByIdusuario;
     }
 }

@@ -1,25 +1,27 @@
 package Models;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "historicotarefa", schema = "easydoc", catalog = "")
-public class HistoricotarefaEntity {
+public class Historicotarefa {
     private int idhisttarefa;
     private int idtarefa;
     private int idusuario;
     private int idgrupo;
     private String nome;
     private String descricao;
-    private Timestamp dataDeInicio;
+    private Date dataDeInicio;
     private int usuarioModificacao;
-    private Timestamp ultimaModificacao;
+    private Date ultimaModificacao;
     private int quantidadeDeModificacao;
+    private Tarefa tarefaByIdtarefa;
+    private Usuario usuarioByIdusuario;
+    private Grupo grupoByIdgrupo;
 
     @Id
-    @Column(name = "IDHISTTAREFA")
+    @Column(name = "idhisttarefa")
     public int getIdhisttarefa() {
         return idhisttarefa;
     }
@@ -29,7 +31,7 @@ public class HistoricotarefaEntity {
     }
 
     @Basic
-    @Column(name = "IDTAREFA")
+    @Column(name = "idtarefa")
     public int getIdtarefa() {
         return idtarefa;
     }
@@ -39,7 +41,7 @@ public class HistoricotarefaEntity {
     }
 
     @Basic
-    @Column(name = "IDUSUARIO")
+    @Column(name = "idusuario")
     public int getIdusuario() {
         return idusuario;
     }
@@ -49,7 +51,7 @@ public class HistoricotarefaEntity {
     }
 
     @Basic
-    @Column(name = "IDGRUPO")
+    @Column(name = "idgrupo")
     public int getIdgrupo() {
         return idgrupo;
     }
@@ -59,7 +61,7 @@ public class HistoricotarefaEntity {
     }
 
     @Basic
-    @Column(name = "NOME")
+    @Column(name = "nome")
     public String getNome() {
         return nome;
     }
@@ -69,7 +71,7 @@ public class HistoricotarefaEntity {
     }
 
     @Basic
-    @Column(name = "DESCRICAO")
+    @Column(name = "descricao")
     public String getDescricao() {
         return descricao;
     }
@@ -79,17 +81,17 @@ public class HistoricotarefaEntity {
     }
 
     @Basic
-    @Column(name = "DATA_DE_INICIO")
-    public Timestamp getDataDeInicio() {
+    @Column(name = "data_de_inicio")
+    public Date getDataDeInicio() {
         return dataDeInicio;
     }
 
-    public void setDataDeInicio(Timestamp dataDeInicio) {
+    public void setDataDeInicio(Date dataDeInicio) {
         this.dataDeInicio = dataDeInicio;
     }
 
     @Basic
-    @Column(name = "USUARIO_MODIFICACAO")
+    @Column(name = "usuario_modificacao")
     public int getUsuarioModificacao() {
         return usuarioModificacao;
     }
@@ -99,17 +101,17 @@ public class HistoricotarefaEntity {
     }
 
     @Basic
-    @Column(name = "ULTIMA_MODIFICACAO")
-    public Timestamp getUltimaModificacao() {
+    @Column(name = "ultima_modificacao")
+    public Date getUltimaModificacao() {
         return ultimaModificacao;
     }
 
-    public void setUltimaModificacao(Timestamp ultimaModificacao) {
+    public void setUltimaModificacao(Date ultimaModificacao) {
         this.ultimaModificacao = ultimaModificacao;
     }
 
     @Basic
-    @Column(name = "QUANTIDADE_DE_MODIFICACAO")
+    @Column(name = "quantidade_de_modificacao")
     public int getQuantidadeDeModificacao() {
         return quantidadeDeModificacao;
     }
@@ -122,7 +124,7 @@ public class HistoricotarefaEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        HistoricotarefaEntity that = (HistoricotarefaEntity) o;
+        Historicotarefa that = (Historicotarefa) o;
         return idhisttarefa == that.idhisttarefa &&
                 idtarefa == that.idtarefa &&
                 idusuario == that.idusuario &&
@@ -138,5 +140,38 @@ public class HistoricotarefaEntity {
     @Override
     public int hashCode() {
         return Objects.hash(idhisttarefa, idtarefa, idusuario, idgrupo, nome, descricao, dataDeInicio, usuarioModificacao, ultimaModificacao, quantidadeDeModificacao);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idtarefa", referencedColumnName = "idtarefa", nullable = false,
+            insertable = false, updatable = false)
+    public Tarefa getTarefaByIdtarefa() {
+        return tarefaByIdtarefa;
+    }
+
+    public void setTarefaByIdtarefa(Tarefa tarefaByIdtarefa) {
+        this.tarefaByIdtarefa = tarefaByIdtarefa;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idusuario", referencedColumnName = "idusuario", nullable = false,
+            insertable = false, updatable = false)
+    public Usuario getUsuarioByIdusuario() {
+        return usuarioByIdusuario;
+    }
+
+    public void setUsuarioByIdusuario(Usuario usuarioByIdusuario) {
+        this.usuarioByIdusuario = usuarioByIdusuario;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idgrupo", referencedColumnName = "idgrupo", nullable = false,
+            insertable = false, updatable = false)
+    public Grupo getGrupoByIdgrupo() {
+        return grupoByIdgrupo;
+    }
+
+    public void setGrupoByIdgrupo(Grupo grupoByIdgrupo) {
+        this.grupoByIdgrupo = grupoByIdgrupo;
     }
 }

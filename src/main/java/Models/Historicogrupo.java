@@ -1,25 +1,27 @@
 package Models;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "historicogrupo", schema = "easydoc", catalog = "")
-public class HistoricogrupoEntity {
+public class Historicogrupo {
     private int idhistgrupo;
     private int idgrupo;
     private int idusuario;
     private int idlider;
     private String nome;
     private String descricao;
-    private Timestamp dataDeInicio;
+    private Date dataDeInicio;
     private String situacao;
-    private Timestamp dataSituacao;
+    private Date dataSituacao;
     private int quantidadeDeModificacao;
+    private Grupo grupoByIdgrupo;
+    private Usuario usuarioByIdusuario;
+    private Lider liderByIdlider;
 
     @Id
-    @Column(name = "IDHISTGRUPO")
+    @Column(name = "idhistgrupo")
     public int getIdhistgrupo() {
         return idhistgrupo;
     }
@@ -29,7 +31,7 @@ public class HistoricogrupoEntity {
     }
 
     @Basic
-    @Column(name = "IDGRUPO")
+    @Column(name = "idgrupo")
     public int getIdgrupo() {
         return idgrupo;
     }
@@ -39,7 +41,7 @@ public class HistoricogrupoEntity {
     }
 
     @Basic
-    @Column(name = "IDUSUARIO")
+    @Column(name = "idusuario")
     public int getIdusuario() {
         return idusuario;
     }
@@ -49,7 +51,7 @@ public class HistoricogrupoEntity {
     }
 
     @Basic
-    @Column(name = "IDLIDER")
+    @Column(name = "idlider")
     public int getIdlider() {
         return idlider;
     }
@@ -59,7 +61,7 @@ public class HistoricogrupoEntity {
     }
 
     @Basic
-    @Column(name = "NOME")
+    @Column(name = "nome")
     public String getNome() {
         return nome;
     }
@@ -69,7 +71,7 @@ public class HistoricogrupoEntity {
     }
 
     @Basic
-    @Column(name = "DESCRICAO")
+    @Column(name = "descricao")
     public String getDescricao() {
         return descricao;
     }
@@ -79,17 +81,17 @@ public class HistoricogrupoEntity {
     }
 
     @Basic
-    @Column(name = "DATA_DE_INICIO")
-    public Timestamp getDataDeInicio() {
+    @Column(name = "data_de_inicio")
+    public Date getDataDeInicio() {
         return dataDeInicio;
     }
 
-    public void setDataDeInicio(Timestamp dataDeInicio) {
+    public void setDataDeInicio(Date dataDeInicio) {
         this.dataDeInicio = dataDeInicio;
     }
 
     @Basic
-    @Column(name = "SITUACAO")
+    @Column(name = "situacao")
     public String getSituacao() {
         return situacao;
     }
@@ -99,17 +101,17 @@ public class HistoricogrupoEntity {
     }
 
     @Basic
-    @Column(name = "DATA_SITUACAO")
-    public Timestamp getDataSituacao() {
+    @Column(name = "data_situacao")
+    public Date getDataSituacao() {
         return dataSituacao;
     }
 
-    public void setDataSituacao(Timestamp dataSituacao) {
+    public void setDataSituacao(Date dataSituacao) {
         this.dataSituacao = dataSituacao;
     }
 
     @Basic
-    @Column(name = "QUANTIDADE_DE_MODIFICACAO")
+    @Column(name = "quantidade_de_modificacao")
     public int getQuantidadeDeModificacao() {
         return quantidadeDeModificacao;
     }
@@ -122,7 +124,7 @@ public class HistoricogrupoEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        HistoricogrupoEntity that = (HistoricogrupoEntity) o;
+        Historicogrupo that = (Historicogrupo) o;
         return idhistgrupo == that.idhistgrupo &&
                 idgrupo == that.idgrupo &&
                 idusuario == that.idusuario &&
@@ -138,5 +140,38 @@ public class HistoricogrupoEntity {
     @Override
     public int hashCode() {
         return Objects.hash(idhistgrupo, idgrupo, idusuario, idlider, nome, descricao, dataDeInicio, situacao, dataSituacao, quantidadeDeModificacao);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idgrupo", referencedColumnName = "idgrupo", nullable = false,
+            insertable = false, updatable = false)
+    public Grupo getGrupoByIdgrupo() {
+        return grupoByIdgrupo;
+    }
+
+    public void setGrupoByIdgrupo(Grupo grupoByIdgrupo) {
+        this.grupoByIdgrupo = grupoByIdgrupo;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idusuario", referencedColumnName = "idusuario", nullable = false,
+            insertable = false, updatable = false)
+    public Usuario getUsuarioByIdusuario() {
+        return usuarioByIdusuario;
+    }
+
+    public void setUsuarioByIdusuario(Usuario usuarioByIdusuario) {
+        this.usuarioByIdusuario = usuarioByIdusuario;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idlider", referencedColumnName = "idlider", nullable = false,
+            insertable = false, updatable = false)
+    public Lider getLiderByIdlider() {
+        return liderByIdlider;
+    }
+
+    public void setLiderByIdlider(Lider liderByIdlider) {
+        this.liderByIdlider = liderByIdlider;
     }
 }
