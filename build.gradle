@@ -33,6 +33,7 @@ dependencies {
             "org.apache.tomcat.embed:tomcat-embed-logging-juli:9.0.0.M6",
             "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
 
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.16'
     compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.4.3.Final'
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.3.Final'
     compile group: 'com.sun.faces', name: 'jsf-api', version: '2.2.4'

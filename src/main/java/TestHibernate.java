@@ -9,13 +9,13 @@ import javax.persistence.metamodel.EntityType;
 
 import java.util.Map;
 
-public class Main {
+public class TestHibernate {
     private static final SessionFactory ourSessionFactory;
 
     static {
         try {
             Configuration configuration = new Configuration();
-            configuration.configure("/hibernate.cfg.xml");
+            configuration.configure();
 
             ourSessionFactory = configuration.buildSessionFactory();
         } catch (Throwable ex) {
