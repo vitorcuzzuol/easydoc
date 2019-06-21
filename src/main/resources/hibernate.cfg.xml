@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-
+        <property name="hibernate.session_factory_name">puEasydoc</property>
         <!--property name="connection.url">
             jdbc:postgresql://ec2-50-19-114-27.compute-1.amazonaws.com:5432/daj2g1u97lfu8g?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory
         </property>
