@@ -1,21 +1,23 @@
 package Dao;
 
-import Models.Usuario;
+import Models.Grupo;
+import Models.Tarefa;
 import Util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-import javax.persistence.criteria.CriteriaQuery;
-
 
 import java.util.List;
 
-public class UsuarioDao {
+public class GrupoDao {
+
 
     private final Session session;
-    private final Usuario usuario;
+    private final Grupo grupo;
 
-    public UsuarioDao(Usuario usuario) {
-        this.usuario = usuario;
+
+
+    public GrupoDao(Grupo grupo) {
+        this.grupo = grupo;
         this.session = HibernateUtil.getSession();
     }
 
@@ -23,10 +25,10 @@ public class UsuarioDao {
         return session;
     }
 
-    protected void save(Usuario usuario) {
+    protected void save(Grupo grupo) {
         try {
             getSession().getTransaction().begin();
-            getSession().save(usuario);
+            getSession().save(grupo);
             getSession().getTransaction().commit();
         } catch (Throwable t) {
             getSession().getTransaction().rollback();
@@ -36,10 +38,10 @@ public class UsuarioDao {
         }
     }
 
-    protected void update(Usuario usuario) {
+    protected void update(Grupo grupo) {
         try {
             getSession().getTransaction().begin();
-            getSession().update(usuario);
+            getSession().update(grupo);
             getSession().getTransaction().commit();
         } catch (Throwable t) {
             getSession().getTransaction().rollback();
@@ -49,10 +51,23 @@ public class UsuarioDao {
         }
     }
 
-    protected void delete(Usuario usuario) {
+    public List<Tarefa> tarefaList (int idgrupo){
+        List<Tarefa> tarefas;
+
+            getSession().getTransaction().begin();
+            tarefas = getSession().createQuery(
+                    "select tarefa " +
+                    "from Tarefa tarefa " +
+                    "where tarefa.idgrupo = ?1",
+                    Tarefa.class)
+                    .setParameter(1,idgrupo)
+                    .getResultList();
+            return tarefas;
+    }
+    protected void delete(Grupo grupo) {
         try {
             getSession().getTransaction().begin();
-            getSession().delete(usuario);
+            getSession().delete(grupo);
             getSession().getTransaction().commit();
         } catch (Throwable t) {
             getSession().getTransaction().rollback();
@@ -63,17 +78,17 @@ public class UsuarioDao {
     }
 
     public List findAll() throws Exception {
-        return getSession().createCriteria(Usuario.class).list();
+        return getSession().createCriteria(Grupo.class).list();
     }
 
-    public Usuario findByName(String nome) {
-        return (Usuario) getSession().createCriteria(Usuario.class)
+    public Grupo findByName(String nome) {
+        return (Grupo) getSession().createCriteria(Grupo.class)
                 .add(Restrictions.eq("nome", nome).ignoreCase()).uniqueResult();
     }
 
-    public Usuario findById(long id) {
-        return (Usuario) getSession().createCriteria(Usuario.class)
-                .add(Restrictions.eq("id", id)).uniqueResult();
+    public Grupo findById(int id) {
+        return (Grupo) getSession().createCriteria(Grupo.class)
+                .add(Restrictions.eq("idgrupo", id)).uniqueResult();
     }
 
     private void close() {

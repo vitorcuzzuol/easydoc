@@ -41,5 +41,15 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://jdbc:postgresql://ec2-50-19-114-27.compute-1.amazonaws.com:5432/daj2g1u97lfu8g</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="8786a38d-3b27-43d3-8ae3-0aa37284aeb0">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate
+
+C:/Users/vitor/Documents/UFF/DAC/dac_trabalho-master/dac_trabalho-master/easydoc/src/main/resources/hibernate.cfg.xml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/easydoc</jdbc-url>
+    </data-source>
   </component>
 </project>
