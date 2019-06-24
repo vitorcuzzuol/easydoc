@@ -5,27 +5,27 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.session_factory_name">puEasydoc</property>
-        <!--property name="connection.url">
+        <property name="connection.url">
             jdbc:postgresql://ec2-50-19-114-27.compute-1.amazonaws.com:5432/daj2g1u97lfu8g?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory
         </property>
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="connection.username">idazxwybczlduo</property>
         <property name="connection.password">
-            SENHAAQUI
+            ee57e01406283cdc4f2dcd6e7ef13a06a62925e1b13eae758fe4d9fb94d93872
         </property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
         <property name="hibernate.dialect">org.hibernate.dialect.ProgressDialect</property>
-        <property name="hibernate.hibernate.hbm2ddl.auto">update</property> -->
+        <property name="hibernate.hibernate.hbm2ddl.auto">update</property>
 
-        <property name="connection.url">jdbc:postgresql://localhost:5432/easydoc</property>
+        <!--property name="connection.url">jdbc:postgresql://localhost:5432/easydoc</property>
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="connection.username">postgres</property>
         <property name="connection.password">root</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.format_sql">true</property>
         <property name="hibernate.dialect">org.hibernate.dialect.ProgressDialect</property>
-        <property name="hibernate.hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hibernate.hbm2ddl.auto">update</property> -->
 
 
         <mapping class="Models.Anexo"/>
